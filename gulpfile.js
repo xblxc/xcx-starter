@@ -10,7 +10,7 @@ gulp.task('clean', function(){
   return del(['dist/'], { force: true });
 });
 
-gulp.task('build', ['clean'],  function(){
+gulp.task('build', function(){
     var sassFilter = filter('**/*.{scss,sass,wxss}', {restore: true});
     var otherFilter = filter(['**', '!**/*.{scss,sass,wxss}']);
     return gulp.src('src/**')
@@ -27,7 +27,7 @@ gulp.task('build', ['clean'],  function(){
 });
 
 gulp.task('watch', function(){
-    return gulp.watch('src/**', ['build'])
+    return gulp.watch('src/**/*', ['build'])
 });
 
-gulp.task('default', gulpSequence('build', 'watch'));
+gulp.task('default', gulpSequence('clean', 'build', 'watch'));
